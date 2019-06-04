@@ -12,13 +12,22 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
+  // Making an HTTP request with the Node module
   request(options, function(err, res, body) {
+    // Parsing the JSON into an object
+    var parsedData = JSON.parse(body);
 
-    cb(err, body);
+    // Handing back the object to my callback function
+    cb(err, parsedData);
   });
 }
 
 getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result:", result);
+  // Looping over the array of objects to pull the avatar_url value
+  result.forEach(function(e) {
+    console.log(e.avatar_url);
+  });
+
+  // console.log("Errors:", err);
+  // console.log("Result:", ;
 });
