@@ -43,17 +43,17 @@ function downloadImageByURL(url, filePath) {
   // Using the Request module again to make another HTTP request,
   // the relevant image and pipe it to a subdirectory
   request.get(url)
-          .on('error', function(err) {
-            throw err;
-          })
-          .on('response', function(response) {
-            console.log('Response Status Code: ', response.statusCode);
-            console.log('Response Status Message: ', response.statusMessage);
-            console.log('Response Headers: ', response.headers['content-type']);
-            console.log('Downloading image...');
-          })
-          .pipe(fs.createWriteStream('avatars/' + filePath + '.jpg'))
-          .on('finish', function() {
-            console.log('Download complete');
-          })
+         .on('error', function(err) {
+           throw err;
+         })
+         .on('response', function(response) {
+           console.log('Response Status Code: ', response.statusCode);
+           console.log('Response Status Message: ', response.statusMessage);
+           console.log('Response Headers: ', response.headers['content-type']);
+           console.log('Downloading image...');
+         })
+         .pipe(fs.createWriteStream('avatars/' + filePath + '.jpg'))
+         .on('finish', function() {
+           console.log('Download complete');
+         })
 };
