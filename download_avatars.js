@@ -1,4 +1,5 @@
 var request = require('request');
+var secret = require('secrets.js');
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -7,11 +8,12 @@ function getRepoContributors(repoOwner, repoName, cb) {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers: {
       'User-Agent': 'request',
-      'Authorization': 'token 7a25748046c61748a3b8b5eaa54dea42554014f2'
+      'Authorization': 'token ' + token.GITHUB_TOKEN;
     }
   };
 
   request(options, function(err, res, body) {
+
     cb(err, body);
   });
 }
