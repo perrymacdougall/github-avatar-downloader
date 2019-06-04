@@ -27,7 +27,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 getRepoContributors("jquery", "jquery", function(err, result) {
   // Looping over the array of objects to pull the avatar_url value
   result.forEach(function(e) {
-    console.log(e.avatar_url);
+    downloadImageByURL(e.avatar_url, e.login);
   });
 
   // console.log("Errors:", err);
@@ -37,7 +37,7 @@ getRepoContributors("jquery", "jquery", function(err, result) {
 function downloadImageByURL(url, filePath) {
   // Using the Request module again to make another HTTP request,
   // the relevant image and pipe it to a subdirectory
-  request.get('https://avatars2.githubusercontent.com/u/2741?v=3&s=466')
+  request.get(url)
           .on('error', function(err) {
             throw err;
             console.log('error block');
@@ -49,10 +49,10 @@ function downloadImageByURL(url, filePath) {
             console.log('Downloading image...');
             console.log('response block');
           })
-          .pipe(fs.createWriteStream('avatars/kvirani.jpg'))
+          .pipe(fs.createWriteStream('avatars/' + filePath + '.jpg'))
           .on('finish', function() {
             console.log('Download complete');
           })
+};
 
-
-downloadImageByURL();
+// downloadImageByURL();
